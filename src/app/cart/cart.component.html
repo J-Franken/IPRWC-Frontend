@@ -1,27 +1,36 @@
 <app-header></app-header>
 
 <div class="cart-container">
-  <div class="cart-item">
-    <img src="https://via.placeholder.com/300x200.png?text=Product+Image" alt="Product image">
-    <div class="item-details">
-      <h4>Product Name</h4>
-      <p class="price">$20.00</p>
-      <input type="number" value="1" min="1">
-    </div>
-    <button class="remove-item">Remove</button>
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <p>Number of Items: {{ items.length }}</p>
   </div>
-  <div class="cart-item">
-    <img src="https://via.placeholder.com/300x200.png?text=Product+Image" alt="Product image">
-    <div class="item-details">
-      <h4>Product Name</h4>
-      <p class="price">$20.00</p>
-      <input type="number" value="1" min="1">
+  <div class="cart-items">
+    <div *ngFor="let item of items" class="cart-item">
+      <div class="cart-item-image">
+        <img src="https://via.placeholder.com/300x200.png?text=Product+Image" alt="{{ item.product.name }}" />
+      </div>
+      <div class="cart-item-details">
+        <h4>{{ item.product.name }}</h4>
+        <p>{{ item.product.description }}</p>
+      </div>
+      <div class="cart-item-quantity">
+        <button (click)="decreaseQuantity(item)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increaseQuantity(item)">+</button>
+      </div>
+      <div class="cart-item-price">
+        <p>{{ item.product.price | currency }}</p>
+        <button (click)="removeItem(item)">Remove</button>
+      </div>
     </div>
-    <button class="remove-item">Remove</button>
   </div>
   <div class="cart-total">
-    <p>Total: $40.00</p>
-    <button class="checkout">Checkout</button>
+    <h4>Total: {{ getTotal() | currency }}</h4>
+  </div>
+  <div class="cart-buttons">
+    <button class="checkout-button">Checkout</button>
+    <button class="clear-button" (click)="clearCart()">Clear Cart</button>
   </div>
 </div>
 
