@@ -3,9 +3,9 @@
     <div class="card">
       <img src="https://via.placeholder.com/300x200.png?text=Product+Image" class="card-img-top" alt="{{ product.name }}">
       <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
+        <h2 class="card-title">{{ product.name }}</h2>
         <p class="card-text">{{ product.description }}</p>
-        <h6 class="card-subtitle mb-2 text-muted">${{ product.price }}</h6>
+        <h4 class="card-subtitle mb-2 text-muted">${{ product.price }}</h4>
         <a (click)="addToCart(product)" class="btn btn-primary" >Add to Cart</a>
       </div>
     </div>
