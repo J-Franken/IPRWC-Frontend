@@ -7,6 +7,14 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class CartService {
+  private cartKey = 'cart';
+
+  constructor() {
+    const cart = localStorage.getItem(this.cartKey);
+    if (cart) {
+      this.items = JSON.parse(cart);
+    }
+  }
   items: OrderItem[] = []
 
   addToCart(product: Product) {
@@ -21,6 +29,7 @@ export class CartService {
     if (!addedToExistingItem) {
       this.items.push({ product: product, quantity: 1 });
     }
+    this.saveCart();
   }
 
   getItems() {
@@ -29,6 +38,7 @@ export class CartService {
 
   increaseQuantity(item: OrderItem) {
     item.quantity++;
+    this.saveCart();
   }
 
   decreaseQuantity(item: OrderItem) {
@@ -37,43 +47,15 @@ export class CartService {
       const index = this.items.indexOf(item);
       this.items.splice(index, 1);
     }
+    this.saveCart();
   }
   clearCart() {
     this.items = [];
+    this.saveCart();
     return this.items;
   }
 
-  private cartSubject = new BehaviorSubject<OrderItem[]>(this.getCartItemsFromLocalStorage());
-  public cart$ = this.cartSubject.asObservable();
-
-  private getCartItemsFromLocalStorage(): OrderItem[] {
-    const cartItemsJson = localStorage.getItem('cartItems');
-    return cartItemsJson ? JSON.parse(cartItemsJson) : [];
-  }
-
-  private saveCartItemsToLocalStorage(cartItems: OrderItem[]): void {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }
-
-  public updateCartItemQuantity(orderItem: OrderItem): void {
-    const cartItems = this.getCartItemsFromLocalStorage();
-    const existingOrderItem = cartItems.find(item => item.product.id === orderItem.product.id);
-    if (existingOrderItem) {
-      existingOrderItem.quantity = orderItem.quantity;
-    } else {
-      cartItems.push(orderItem);
-    }
-    this.saveCartItemsToLocalStorage(cartItems);
-    this.cartSubject.next(cartItems);
-  }
-
-  public removeCartItem(orderItem: OrderItem): void {
-    const cartItems = this.getCartItemsFromLocalStorage();
-    const index = cartItems.findIndex(item => item.product.id === orderItem.product.id);
-    if (index !== -1) {
-      cartItems.splice(index, 1);
-      this.saveCartItemsToLocalStorage(cartItems);
-      this.cartSubject.next(cartItems);
-    }
+  private saveCart() {
+    localStorage.setItem(this.cartKey, JSON.stringify(this.items));
   }
 }
