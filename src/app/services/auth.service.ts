@@ -5,7 +5,6 @@ import {catchError, map, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {ApiResponse} from "../interfaces/apiResponse.interface";
 
-
 @Injectable({
   providedIn: "root"
 })
@@ -18,17 +17,16 @@ export class AuthService {
 
 
   registerHandler() {
-    const account = this.accountService.getAccount();
-    return this.http.post(environment.apiKey + 'auth/register', account)
+    return this.http.post(environment.apiKey + 'auth/register', this.accountService.getAccount())
       .pipe(
         tap((data: any) => {
-          if (data?.code === 'ACCEPTED') {
+          if (data.code === 'ACCEPTED') {
             this.accountService.setJWT(data.message);
           } else {
-            throw new Error(data?.message ?? 'Unknown error');
+            throw new Error(data.message ?? 'Unknown error');
           }
         }),
-        catchError(error => {
+        catchError(() => {
           throw new Error('Unable to register user account. Please try again later.')
         })
       );
@@ -38,33 +36,48 @@ export class AuthService {
     return this.http.post(environment.apiKey + 'auth/login', credentials)
       .pipe(
         tap((data: any) => {
-          if (data?.code === 'ACCEPTED') {
+          if (data.code === 'ACCEPTED') {
             this.accountService.setJWT(data.message);
           } else {
-            throw new Error(data?.message ?? 'Unknown error');
+            throw new Error(data.message ?? 'Unknown error');
           }
         }),
-        catchError(error => {
+        catchError(() => {
           throw new Error('Unable to login. Please check your credentials and try again.')
         })
       );
   }
 
+
   infoHandler() {
     let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
-    return this.http.get(environment.apiKey + 'auth/info', {headers: header})
-      .pipe(
-        tap((data: any) => {
-          if (data?.code === 'ACCEPTED') {
-            return data.payload;
-          } else {
-            throw new Error(data?.payload ?? 'Unknown error');
-          }
-        }),
-        catchError(error => {
-          throw new Error('Unable to get user info. Please try again later.');
-        })
-      );
+    return this.http.get(environment.apiKey + 'auth/info',
+      {
+        headers: header
+      }).pipe(map((data: any) => {
+      if (data.code === 'ACCEPTED') {
+        return data.payload;
+      } else {
+        throw new Error(data.payload)
+      }
+    }));
   }
+
+  // infoHandler() {
+  //   let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
+  //   return this.http.get(environment.apiKey + 'auth/info', {headers: header})
+  //     .pipe(
+  //       tap((data: any) => {
+  //         if (data.code === 'ACCEPTED') {
+  //           return data.payload;
+  //         } else {
+  //           throw new Error(data.payload ?? 'Unknown error');
+  //         }
+  //       }),
+  //       catchError(error => {
+  //         throw new Error('Unable to get user info. Please try again later.');
+  //       })
+  //     );
+  // }
 }
 

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {CartService} from "../services/cart.service";
 import {OrderItem} from "../interfaces/orderItem.interface";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AccountService} from "../services/account.service";
+import {Order} from "../model/order.model";
+import {v4 as uuidv4} from "uuid";
+import {OrderService} from "../services/order.service";
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +15,8 @@ import {OrderItem} from "../interfaces/orderItem.interface";
 export class CartComponent implements OnInit {
   items: OrderItem[] = [];
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private _snackbar: MatSnackBar, private accountService: AccountService, private orderService: OrderService) {
+  }
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
@@ -42,5 +48,29 @@ export class CartComponent implements OnInit {
       total += item.quantity * item.product.price;
     }
     return total;
+  }
+
+  createOrder() {
+    if (this.items == null || this.items.length === 0) {
+      return this._snackbar.open("No items in the cart", 'Dismiss', {
+        duration: 3000,
+        horizontalPosition: 'right'
+      });
+    } else if (!this.accountService.getAccount()) {
+      return this._snackbar.open("You aren't logged in!", 'Dismiss', {
+        duration: 3000,
+        horizontalPosition: 'right'
+      });
+    } else {
+      const order = new Order(
+        Number(uuidv4()),
+        Number(uuidv4())
+      );
+      this._snackbar.open("Order created successfully", 'Dismiss', {
+        duration: 3000,
+        horizontalPosition: 'right'
+      });
+      this.clearCart();
+    } return null;
   }
 }

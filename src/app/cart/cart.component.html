@@ -29,7 +29,7 @@
     <h4>Total: {{ getTotal() | currency }}</h4>
   </div>
   <div class="cart-buttons">
-    <button class="checkout-button">Checkout</button>
+    <button class="checkout-button" (click)="createOrder()">Checkout</button>
     <button class="clear-button" (click)="clearCart()">Clear Cart</button>
   </div>
 </div>

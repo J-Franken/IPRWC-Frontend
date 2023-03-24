@@ -1,1 +1,86 @@
-<p>admin works!</p>
+<app-header></app-header>
+<h1 class="text-center text-danger mb-4">Add Product Here</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="addForm">
+  <h4 class="text-center text-danger-emphasis mb-4">Name</h4>
+  <input
+    class="mb-3 form-control form-control-user"
+    formControlName="name"
+    type="text"
+    required
+  />
+  <h4 class="text-center text-danger-emphasis mb-4">Description</h4>
+  <textarea
+    class="mb-3 form-control form-control-user"
+    formControlName="description"
+    required
+  ></textarea>
+  <h4 class="text-center text-danger-emphasis mb-4">Price</h4>
+  <input
+    class="mb-3 form-control form-control-user"
+    formControlName="price"
+    type="text"
+    required
+  />
+  <button
+    class="btn btn-danger d-block btn-user w-100 mb-2"
+    type="submit">
+    <div>
+      <i class="bi bi-box-arrow-in-right"></i>Add Product
+    </div>
+  </button>
+</form>
+
+<!--<div class="container">-->
+<!--  <div class="content">-->
+<!--    <div class="row">-->
+<!--      <div class="col-xs-12">-->
+<!--        <h3>Add Product here!</h3>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <form (ngSubmit)="onSubmit()" #f=ngForm>-->
+<!--          <div class="grid">-->
+<!--            <section>-->
+<!--              <label>Name</label>-->
+<!--              <input class="form-control"-->
+<!--                     type="text"-->
+<!--                     name="name"-->
+<!--                     ngModel-->
+<!--                     required-->
+<!--                     #name=ngModel>-->
+<!--              <span class="help-block" *ngIf="!name.valid && name.touched">-->
+<!--                Please enter a valid name!</span>-->
+<!--            </section>-->
+<!--            <section>-->
+<!--              <label>Description</label>-->
+<!--              <input class="form-control"-->
+<!--                     type="text"-->
+<!--                     name="description"-->
+<!--                     ngModel-->
+<!--                     required-->
+<!--                     #url=ngModel>-->
+<!--            </section>-->
+<!--            <section>-->
+<!--              <label>Price</label>-->
+<!--              <input class="form-control"-->
+<!--                     type="text"-->
+<!--                     name="price"-->
+<!--                     ngModel-->
+<!--                     required-->
+
+<!--                     [pattern]="'^[+-]?([0-9]*[.])?[0-9]+'"-->
+<!--                     #price=ngModel>-->
+<!--              <span class="help-block" *ngIf="!price.valid && price.touched">-->
+<!--                Please enter a valid price!</span>-->
+
+<!--            </section>-->
+<!--          </div>-->
+<!--          <button class="btn btn-default" [disabled]="!f.valid">Add Product &#x271A; </button>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<app-footer></app-footer>
