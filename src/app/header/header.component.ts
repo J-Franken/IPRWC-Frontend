@@ -20,4 +20,9 @@ export class HeaderComponent implements OnInit{
       this.admin = account.admin;
     }
   }
+
+  onLogOut(){
+    this.accountService.destroyJWT();
+    this.accountService.destroyUser();
+  }
 }

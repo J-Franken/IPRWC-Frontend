@@ -8,7 +8,7 @@ export class LoginComponent {
   email!: string;
   password!: string;
 
-  login() {
+  onSubmit() {
     // Implement your login logic here
   }
 }
