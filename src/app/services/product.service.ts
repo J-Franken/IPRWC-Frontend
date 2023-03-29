@@ -9,7 +9,7 @@ import {AccountService} from "./account.service";
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080/api/products';
+  private apiUrl = 'https://iprwc-cc6b9.web.app/api/';
 
   constructor(private http: HttpClient, private accountService: AccountService) { }
 

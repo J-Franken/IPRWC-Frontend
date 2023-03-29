@@ -27,9 +27,38 @@
     ],
     "rewrites": [
       {
+        "source": "/api/**",
+        "function": "myFunction"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
     ]
-  }
+  },
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "functions": [
+    {
+      "functions": {
+        "runtime": "java20",
+        "source": "build",
+        "entryPoint": "com.example.myFunction"
+      }
+    },
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
 }
