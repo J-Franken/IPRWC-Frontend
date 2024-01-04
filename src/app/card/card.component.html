@@ -1,12 +1,14 @@
-<div class="row">
-  <div class="col-md-4 mb-4" *ngFor="let product of products">
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200.png?text=Product+Image" class="card-img-top" alt="{{ product.name }}">
-      <div class="card-body">
-        <h2 class="card-title">{{ product.name }}</h2>
-        <p class="card-text">{{ product.description }}</p>
-        <h4 class="card-subtitle mb-2 text-muted">${{ product.price }}</h4>
-        <a (click)="addToCart(product)" class="btn btn-primary" >Add to Cart</a>
+<div class="container-fluid pt-2">
+  <div class="row">
+    <div class="col-4 mb-5 flex-grow-0" *ngFor="let product of products">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200.png?text=Product+Image" class="card-img-top" alt="{{ product.name }}">
+        <div class="card-body">
+          <h2 class="card-title">{{ product.name }}</h2>
+          <p class="card-text">{{ product.description }}</p>
+          <h4 class="card-subtitle mb-2 text-muted">${{ product.price }}</h4>
+          <a (click)="addToCart(product)" class="btn btn-primary" >Add to Cart</a>
+        </div>
       </div>
     </div>
   </div>
