@@ -99,18 +99,11 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "prerender": false,
-            "ssr": false,
-            "browserTarget": "IPRWC:build:production",
-            "firebaseProject": "iprwc-cc6b9",
-            "firebaseHostingSite": "iprwc-cc6b9"
-          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "41c71b95-d1df-40a5-8dbd-e902af169c11"
   }
 }
