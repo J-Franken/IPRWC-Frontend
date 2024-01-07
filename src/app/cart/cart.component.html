@@ -1,9 +1,9 @@
 <app-header></app-header>
 
-<div class="cart-container">
+<div class="mt-2 cart-container">
   <div class="cart-header">
     <h3>Your Cart</h3>
-    <p>Number of Items: {{ items.length }}</p>
+    <p>Your items</p>
   </div>
   <div class="cart-items">
     <div *ngFor="let item of items" class="cart-item">
@@ -33,5 +33,22 @@
     <button class="clear-button" (click)="clearCart()">Clear Cart</button>
   </div>
 </div>
-
+<div class="mt-5 coupon-container">
+  <div class="coupon-header">
+    <h3>Coupon code?</h3>
+    <input
+    class="mb-3 form-control form-control-user"
+    type="text"
+    id="couponCode" 
+    [(ngModel)]="couponCode"
+    required
+  />
+  </div>
+  <button class="btn btn-primary" (click)="validateCoupon()">
+    Apply Coupon
+  </button>
+  <div *ngIf="couponValid !== null">
+    <p class="validation-message">{{ couponValid }}</p>
+  </div>
+</div>
 <app-footer></app-footer>

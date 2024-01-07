@@ -6,6 +6,7 @@ import {AccountService} from "../services/account.service";
 import {Order} from "../model/order.model";
 import {v4 as uuidv4} from "uuid";
 import {OrderService} from "../services/order.service";
+import {CouponService} from "../services/coupon.service";
 
 @Component({
   selector: 'app-cart',
@@ -14,8 +15,10 @@ import {OrderService} from "../services/order.service";
 })
 export class CartComponent implements OnInit {
   items: OrderItem[] = [];
+  couponValid: string | null = null;
+  couponCode: string = '';
 
-  constructor(private cartService: CartService, private _snackbar: MatSnackBar, private accountService: AccountService, private orderService: OrderService) {
+  constructor(private cartService: CartService, private _snackbar: MatSnackBar, private accountService: AccountService, private orderService: OrderService, private couponService: CouponService) {
   }
 
   ngOnInit(): void {
@@ -73,4 +76,17 @@ export class CartComponent implements OnInit {
       this.clearCart();
     } return null;
   }
+
+  validateCoupon() {
+    if (this.couponCode.trim() === '') {
+      this.couponValid = null; // Reset to initial state if coupon code is empty
+      return;
+    }
+
+    this.couponService.checkCouponCode(this.couponCode).subscribe(
+      (response) => {
+        this.couponValid = response;
+      }
+    );
+}
 }

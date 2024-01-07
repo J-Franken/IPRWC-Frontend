@@ -3,8 +3,8 @@
   color: white;
   height: 4vh;
   line-height: 50px;
+  position: absolute;
   bottom: 0;
-  position: fixed;
   width: 100%;
   text-align: center;
 }
