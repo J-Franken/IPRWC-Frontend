@@ -15,8 +15,6 @@ import {CouponService} from "../services/coupon.service";
 })
 export class CartComponent implements OnInit {
   items: OrderItem[] = [];
-  couponValid: string | null = null;
-  couponCode: string = '';
 
   constructor(private cartService: CartService, private _snackbar: MatSnackBar, private accountService: AccountService, private orderService: OrderService, private couponService: CouponService) {
   }
@@ -76,17 +74,4 @@ export class CartComponent implements OnInit {
       this.clearCart();
     } return null;
   }
-
-  validateCoupon() {
-    if (this.couponCode.trim() === '') {
-      this.couponValid = null; // Reset to initial state if coupon code is empty
-      return;
-    }
-
-    this.couponService.checkCouponCode(this.couponCode).subscribe(
-      (response) => {
-        this.couponValid = response;
-      }
-    );
-}
 }
