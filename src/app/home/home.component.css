@@ -1,3 +1,7 @@
 .h1{
   left: 50%
 }
+
+.footer{
+  position: relative;
+}
