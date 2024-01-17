@@ -10,16 +10,12 @@ import {AccountService} from "./account.service";
 })
 export class OrderService {
 
-  private apiUrl = 'http://localhost:4200/api/orders/';
-
   constructor(private http: HttpClient, private accountService: AccountService) { }
 
-  // get orders from API
   getOrder(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
+    return this.http.get<Order[]>(environment.apiKey);
   }
 
-  // add new order to API
   addOrder(order: Object){
     let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
     return this.http.post(environment.apiKey + 'orders', order, {
