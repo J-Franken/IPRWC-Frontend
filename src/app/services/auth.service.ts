@@ -63,21 +63,8 @@ export class AuthService {
     }));
   }
 
-  // infoHandler() {
-  //   let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
-  //   return this.http.get(environment.apiKey + 'auth/info', {headers: header})
-  //     .pipe(
-  //       tap((data: any) => {
-  //         if (data.code === 'ACCEPTED') {
-  //           return data.payload;
-  //         } else {
-  //           throw new Error(data.payload ?? 'Unknown error');
-  //         }
-  //       }),
-  //       catchError(error => {
-  //         throw new Error('Unable to get user info. Please try again later.');
-  //       })
-  //     );
-  // }
+  validSession(): boolean {
+    return this.accountService.getJWT() != undefined;
+  }
 }
 

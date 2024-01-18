@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "http://iprwc-project.j-franken.com.s3-website-us-east-1.amazonaws.com/api/"
+  apiUrl: "http://159.223.242.40:8080/api/"
 };

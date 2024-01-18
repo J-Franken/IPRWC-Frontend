@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiKey: "http://iprwc-project.j-franken.com.s3-website-us-east-1.amazonaws.com/api/"
+  apiKey: "http://159.223.242.40:8080/api/"
 };
