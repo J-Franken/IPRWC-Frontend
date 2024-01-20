@@ -4,6 +4,7 @@ import {environment} from "../environments/environment";
 import {catchError, map, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {ApiResponse} from "../interfaces/apiResponse.interface";
+import { Account } from "../model/account.model";
 
 @Injectable({
   providedIn: "root"
@@ -16,8 +17,8 @@ export class AuthService {
   }
 
 
-  registerHandler() {
-    return this.http.post(environment.apiKey + 'auth/register', this.accountService.getAccount())
+  registerHandler(account: Account) {
+    return this.http.post(environment.apiKey + 'auth/register', account)
       .pipe(
         tap((data: any) => {
           if (data.code === 'ACCEPTED') {

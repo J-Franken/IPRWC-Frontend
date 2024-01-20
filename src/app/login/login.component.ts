@@ -45,7 +45,6 @@ export class LoginComponent {
             data.password,
             data.admin,
           );
-          console.log(account.id, account.email, account.admin)
           this.accountService.setAccount(account);
           this.infoSubscription.unsubscribe();
           this.router.navigate(['/'])

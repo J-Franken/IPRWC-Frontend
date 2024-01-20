@@ -34,10 +34,9 @@ export class RegisterComponent implements OnInit {
         this.registrationForm.value.password,
         false
       );
-      this.accountService.setAccount(account);
-      this.authSub = this.authService.registerHandler().subscribe(() => {
+      this.authSub = this.authService.registerHandler(account).subscribe(() => {
         this.authSub.unsubscribe();
-        this.router.navigate(['/'])
+        this.router.navigate(['/login'])
         return this._snackBar.open('Registering successful!', 'Dismiss', {
           duration: 3000,
           horizontalPosition: 'right'

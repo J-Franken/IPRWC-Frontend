@@ -35,17 +35,27 @@ export class AdminComponent implements OnInit {
         this.addForm.value.name,
         this.addForm.value.description,
         this.addForm.value.price)
-      ).subscribe(() => {
-        this._snackBar.open('New product has been added to the shop', 'Dismiss', {
-          duration: 3000,
-          horizontalPosition: 'right'
-        });
-      }, () => {
-        this._snackBar.open('New product has been added to the shop', 'Dismiss', {
-          duration: 3000,
-          horizontalPosition: 'right'
-        });
-      });
+      ).subscribe(
+        () => {
+          this._snackBar.open('New product has been added to the shop.', 'Dismiss', {
+            duration: 3000,
+            horizontalPosition: 'right'
+          });
+        },
+        (error) => {
+          if (!error || !error.message || error.message.trim() === '') {
+            this._snackBar.open('New product has been added to the shop.', 'Dismiss', {
+              duration: 3000,
+              horizontalPosition: 'right'
+            });
+          } else {
+            this._snackBar.open('Failed to add the new product. Please try again later.', 'Dismiss', {
+              duration: 3000,
+              horizontalPosition: 'right'
+            });
+          }
+        }
+      );
     } else {
       this._snackBar.open('Form is invalid. Please check the entered values.', 'Dismiss', {
         duration: 3000,
