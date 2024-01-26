@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
-import {AccountService} from "../services/account.service";
 import {AuthService} from "../services/auth.service";
 import {Account} from "../model/account.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -16,7 +15,7 @@ export class RegisterComponent implements OnInit {
   authSub!: Subscription;
   registrationForm!: FormGroup;
 
-  constructor(private router: Router, private accountService: AccountService, private authService: AuthService, private _snackBar: MatSnackBar) {
+  constructor(private router: Router, private authService: AuthService, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {

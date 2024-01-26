@@ -7,6 +7,8 @@ import {Order} from "../model/order.model";
 import {v4 as uuidv4} from "uuid";
 import {OrderService} from "../services/order.service";
 import {CouponService} from "../services/coupon.service";
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +18,7 @@ import {CouponService} from "../services/coupon.service";
 export class CartComponent implements OnInit {
   items: OrderItem[] = [];
 
-  constructor(private cartService: CartService, private _snackbar: MatSnackBar, private accountService: AccountService, private orderService: OrderService, private couponService: CouponService) {
+  constructor(private http: HttpClient, private cartService: CartService, private _snackbar: MatSnackBar, private accountService: AccountService, private orderService: OrderService, private couponService: CouponService) {
   }
 
   ngOnInit(): void {
@@ -65,13 +67,25 @@ export class CartComponent implements OnInit {
     } else {
       const order = new Order(
         Number(uuidv4()),
-        Number(uuidv4())
+        uuidv4()
       );
-      this._snackbar.open("Order created successfully", 'Dismiss', {
-        duration: 3000,
-        horizontalPosition: 'right'
-      });
-      this.clearCart();
+    
+      this.http.post(`${environment.apiKey}orders`, order).subscribe(
+        (response: any) => {
+          this._snackbar.open('Order created successfully', 'Dismiss', {
+            duration: 3000,
+            horizontalPosition: 'right'
+          });
+          this.clearCart();
+        },
+        (error) => {
+          console.error('Failed to create order:', error);
+          this._snackbar.open('Failed to create the order. Please try again later.', 'Dismiss', {
+            duration: 3000,
+            horizontalPosition: 'right'
+          });
+        }
+      );
     } return null;
   }
 }
