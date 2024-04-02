@@ -1,16 +1,18 @@
 import {Component, ViewChild} from '@angular/core';
-import {AccountService} from "../services/account.service";
+import { AccountService } from 'src/app/services/account.service';
 import {Router} from "@angular/router";
-import {AuthService} from "../services/auth.service";
+import { AuthService } from 'src/app/services/auth.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
-import {Account} from "../model/account.model";
+import { Account } from 'src/app/model/account.model';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
   email!: string;
   password!: string;

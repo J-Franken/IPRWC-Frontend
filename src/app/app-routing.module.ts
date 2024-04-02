@@ -1,9 +1,9 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home/home.component";
-import {CartComponent} from "./cart/cart.component";
-import {RegisterComponent} from "./register/register.component";
-import {LoginComponent} from "./login/login.component";
+import { HomeComponent } from "./home/home.component";
+import { CartComponent } from "./cart/cart.component";
+import { RegisterComponent } from "./auth/register/register.component";
+import { LoginComponent } from "./auth/login/login.component";
 import {AdminComponent} from "./admin/admin.component";
 import { AdminGuard } from "./services/admin.guard";
 import { AuthGuard } from "./services/auth.guard";

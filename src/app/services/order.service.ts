@@ -16,16 +16,16 @@ export class OrderService {
     return this.http.get<Order[]>(environment.apiKey);
   }
 
-  addOrder(order: Object){
+  addOrder(order: Order){
     let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
     return this.http.post(environment.apiKey + 'orders', order, {
       headers: header
     })
-      .pipe(map((data: any) => {
-        if (data.code === 'ACCEPTED') {
-          return data.payload;
+      .pipe(map((orderData: any) => {
+        if (orderData.code === 'ACCEPTED') {
+          return orderData.payload;
         } else {
-          throw new Error(data.payload)
+          throw new Error(orderData.payload)
         }
       }));
   }

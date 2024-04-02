@@ -1,33 +1,42 @@
 <app-header></app-header>
-<h1 class="text-center text-danger mb-4 pt-2">Add Product Here</h1>
-<form (ngSubmit)="onSubmit()" [formGroup]="addForm" class="admin-container">
-  <h4 class="text-center text-danger-emphasis mb-4">Name</h4>
-  <input
-    class="mb-3 form-control form-control-user"
-    formControlName="name"
-    type="text"
-    required
-  />
-  <h4 class="text-center text-danger-emphasis mb-4">Description</h4>
-  <textarea
-    class="mb-3 form-control form-control-user"
-    formControlName="description"
-    required
-  ></textarea>
-  <h4 class="text-center text-danger-emphasis mb-4">Price</h4>
-  <input
-    class="mb-3 form-control form-control-user"
-    formControlName="price"
-    type="number"
-    required
-    min="0"
-  />
-  <button
-    class="btn btn-danger d-block btn-user w-100 mb-2"
-    type="submit">
-    <div>
-      <i class="bi bi-box-arrow-in-right"></i>Add Product
-    </div>
+<div *ngIf="showForm">
+  <h1 class="text-center text-success mb-4 pt-2">Add Product Here</h1>
+  <form (ngSubmit)="onSubmit()" [formGroup]="addForm" class="admin-container">
+    <h4 class="text-center text-success-emphasis mb-4">Name</h4>
+    <input class="mb-3 form-control form-control-user" formControlName="name" type="text" required />
+
+    <h4 class="text-center text-success-emphasis mb-4">Description</h4>
+    <textarea class="mb-3 form-control form-control-user" formControlName="description" required></textarea>
+
+    <h4 class="text-center text-success-emphasis mb-4">Price</h4>
+    <input class="mb-3 form-control form-control-user" formControlName="price" type="number" required min="0" />
+
+    <button class="btn btn-success d-block btn-user w-100 mb-2" type="submit">
+      <div>
+        <i class="bi bi-box-arrow-in-right"></i>Add Product
+      </div>
+    </button>
+  </form>
+</div>
+
+<h1 class="text-center text-primary mb-4 pt-2">List of all products</h1>
+<div class= "row justify-content-end mb-3">
+  <div class="col-auto">
+  <button class="btn btn-{{ buttonState ? 'danger' : 'success' }}" (click)="toggleForm()">
+    {{ buttonState ? 'Close' : 'Add new product' }}
   </button>
-</form>
+  </div>
+</div>
+<ul>
+  <li style="background-color: #f0f0f0" *ngFor="let product of products">
+    {{ product.name }} - {{ product.description }} - ${{ product.price }}
+  <div style="display: flex">
+    <button class="btn btn-primary d-block btn-user w-10 mr-2" (click)="editProduct(product.id)" title="Edit">&#9998;</button>
+    <button class="btn btn-danger d-block btn-user w-10 mr-2" (click)="deleteProduct(product)" title="Delete">&#10060;</button>
+  </div>
+  </li>
+</ul>
+
+
+
 

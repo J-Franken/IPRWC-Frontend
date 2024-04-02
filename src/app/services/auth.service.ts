@@ -3,7 +3,6 @@ import {AccountService} from "./account.service";
 import {environment} from "../environments/environment";
 import {catchError, map, tap} from "rxjs";
 import {Injectable} from "@angular/core";
-import {ApiResponse} from "../interfaces/apiResponse.interface";
 import { Account } from "../model/account.model";
 
 @Injectable({
@@ -20,11 +19,11 @@ export class AuthService {
   registerHandler(account: Account) {
     return this.http.post(environment.apiKey + 'auth/register', account)
       .pipe(
-        tap((data: any) => {
-          if (data.code === 'ACCEPTED') {
-            this.accountService.setJWT(data.message);
+        tap((registerForm: any) => {
+          if (registerForm.code === 'ACCEPTED') {
+            this.accountService.setJWT(registerForm.message);
           } else {
-            throw new Error(data.message ?? 'Unknown error');
+            throw new Error(registerForm.message ?? 'Unknown error');
           }
         }),
         catchError(() => {
@@ -36,11 +35,11 @@ export class AuthService {
   loginHandler(credentials: Object) {
     return this.http.post(environment.apiKey + 'auth/login', credentials)
       .pipe(
-        tap((data: any) => {
-          if (data.code === 'ACCEPTED') {
-            this.accountService.setJWT(data.message);
+        tap((loginCredentials: any) => {
+          if (loginCredentials.code === 'ACCEPTED') {
+            this.accountService.setJWT(loginCredentials.message);
           } else {
-            throw new Error(data.message ?? 'Unknown error');
+            throw new Error(loginCredentials.message ?? 'Unknown error');
           }
         }),
         catchError(() => {
@@ -55,11 +54,11 @@ export class AuthService {
     return this.http.get(environment.apiKey + 'auth/info',
       {
         headers: header
-      }).pipe(map((data: any) => {
-      if (data.code === 'ACCEPTED') {
-        return data.payload;
+      }).pipe(map((informationData: any) => {
+      if (informationData.code === 'ACCEPTED') {
+        return informationData.payload;
       } else {
-        throw new Error(data.payload)
+        throw new Error(informationData.payload)
       }
     }));
   }

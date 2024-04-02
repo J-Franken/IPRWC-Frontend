@@ -16,17 +16,49 @@ export class ProductService {
     return this.http.get<Product[]>(environment.apiKey + 'products');
   }
 
-  public addProduct(product: Object) {
+  public addProduct(product: Product) {
     let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
     return this.http.post(environment.apiKey + 'products', product, {
       headers: header
     })
-      .pipe(map((data: any) => {
-        if (data.code === 'ACCEPTED') {
-          return data.payload;
+      .pipe(map((productData: any) => {
+        if (productData.code === 'ACCEPTED') {
+          return productData.payload;
         } else {
-          throw new Error(data.payload)
+          throw new Error(productData.payload)
         }
       }));
   }
+
+  public updateProduct(product: Product) {
+    let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
+    return this.http.put(environment.apiKey + 'products/' + product.id, product, {
+      headers: header
+    })
+      .pipe(map((productData: any) => {
+        if (productData.code === 'ACCEPTED') {
+          return productData.payload;
+        } else {
+          throw new Error(productData.payload)
+        }
+      }));
+    }
+
+  public deleteProduct(id: number) {
+    let header = new HttpHeaders({"Authorization": "Bearer " + this.accountService.getJWT()})
+    return this.http.delete(environment.apiKey + 'products/' + id, {
+      headers: header
+    })
+      .pipe(map((productData: any) => {
+        if (productData.code === 'ACCEPTED') {
+          return productData.payload;
+        } else {
+          throw new Error(productData.payload)
+        }
+      }));
+    }
+
+    getSelectedProduct(productId: number): Observable<Product> {
+      return this.http.get<Product>(`${environment.apiKey}products/${productId}`);
+    }
 }

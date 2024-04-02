@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
-import {AuthService} from "../services/auth.service";
-import {Account} from "../model/account.model";
+import { AuthService } from 'src/app/services/auth.service';
+import { Account } from 'src/app/model/account.model';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {v4 as uuidv4} from "uuid";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
