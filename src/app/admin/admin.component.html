@@ -2,13 +2,13 @@
 <div *ngIf="showForm">
   <h1 class="text-center text-success mb-4 pt-2">Add Product Here</h1>
   <form (ngSubmit)="onSubmit()" [formGroup]="addForm" class="admin-container">
-    <h4 class="text-center text-success-emphasis mb-4">Name</h4>
+    <h4 class="text-center text-success-emphasis mb-4">Product Name</h4>
     <input class="mb-3 form-control form-control-user" formControlName="name" type="text" required />
 
-    <h4 class="text-center text-success-emphasis mb-4">Description</h4>
+    <h4 class="text-center text-success-emphasis mb-4">Product Description</h4>
     <textarea class="mb-3 form-control form-control-user" formControlName="description" required></textarea>
 
-    <h4 class="text-center text-success-emphasis mb-4">Price</h4>
+    <h4 class="text-center text-success-emphasis mb-4">Product Price</h4>
     <input class="mb-3 form-control form-control-user" formControlName="price" type="number" required min="0" />
 
     <button class="btn btn-success d-block btn-user w-100 mb-2" type="submit">

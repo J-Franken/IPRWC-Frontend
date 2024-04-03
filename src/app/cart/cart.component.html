@@ -26,10 +26,19 @@
     </div>
   </div>
   <div class="cart-total">
-    <h4>Total: {{ getTotal() | currency }}</h4>
+    <h4>Total: {{ calculateTotalAmount() | currency }}</h4>
   </div>
   <div class="cart-buttons">
     <button class="checkout-button" (click)="createOrder()">Checkout</button>
     <button class="clear-button" (click)="clearCart()">Clear Cart</button>
+  </div>
+</div>
+<div class="mt-2 cart-container">
+  
+  <div class="row justify-content">
+    <div class="col-auto">
+      <input type="text" #promoCodeInput placeholder="Promo code">
+      <a (click)="applyPromoCode(promoCodeInput.value)" class="btn btn-primary">Apply Coupon</a>
+    </div>
   </div>
 </div>

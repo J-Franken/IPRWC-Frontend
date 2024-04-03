@@ -105,7 +105,7 @@ export class AdminComponent implements OnInit {
       html: `
         <form id="editProductForm">
           <div class="form-group">
-            <label for="productName">Name:</label>
+            <label for="productName">Product name:</label>
             <input type="text" id="productName" class="swal2-input" required>
           </div>
           <div class="form-group">
@@ -113,7 +113,7 @@ export class AdminComponent implements OnInit {
             <textarea id="productDescription" class="swal2-textarea" required></textarea>
           </div>
           <div class="form-group">
-            <label for="productPrice">Price:</label>
+            <label for="productPrice">Product price:</label>
             <input type="number" id="productPrice" class="swal2-input" min="0" required>
           </div>
         </form>

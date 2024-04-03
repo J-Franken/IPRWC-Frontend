@@ -15,6 +15,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { AdminComponent } from './admin/admin.component';
 import { HeaderModule } from './header/header.module';
 import { AuthModule } from './auth/auth.module';
+import { CouponComponent } from './coupon/coupon.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AuthModule } from './auth/auth.module';
     CardComponent,
     CartComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    CouponComponent
   ],
   imports: [
     BrowserModule,

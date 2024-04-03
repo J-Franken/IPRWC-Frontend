@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div *ngIf="showForm">
+  <h1 class="text-center text-success mb-4 pt-2">Add Coupon Here</h1>
+  <form (ngSubmit)="onSubmit()" [formGroup]="addForm" class="coupon-container">
+    <h4 class="text-center text-success-emphasis mb-4">Code (at least 6 characters)</h4>
+    <input class="mb-3 form-control form-control-user" formControlName="code" type="text" required />
+
+    <h4 class="text-center text-success-emphasis mb-4">Discount (in %)</h4>
+    <input class="mb-3 form-control form-control-user" formControlName="discount_in_percentage" type="number" required min="0" max="100"/>
+
+    <button class="btn btn-success d-block btn-user w-100 mb-2" type="submit">
+      <div>
+        <i class="bi bi-box-arrow-in-right"></i>Add Coupon
+      </div>
+    </button>
+  </form>
+</div>
+
+<h1 class="text-center text-primary mb-4 pt-2">List of all coupons</h1>
+<div class= "row justify-content-end mb-3">
+  <div class="col-auto">
+  <button class="btn btn-{{ buttonState ? 'danger' : 'success' }}" (click)="toggleForm()">
+    {{ buttonState ? 'Close' : 'Add new product' }}
+  </button>
+  </div>
+</div>
+<ul>
+  <li style="background-color: #f0f0f0" *ngFor="let promoCode of promoCodes">
+    {{ promoCode.code }} - {{ promoCode.discount_in_percentage }}%
+  <div style="display: flex">
+    <button class="btn btn-primary d-block btn-user w-10 mr-2" (click)="editCoupon(promoCode.id)" title="Edit">&#9998;</button>
+    <button class="btn btn-danger d-block btn-user w-10 mr-2" (click)="deleteCoupon(promoCode)" title="Delete">&#10060;</button>
+  </div>
+  </li>
+</ul>
